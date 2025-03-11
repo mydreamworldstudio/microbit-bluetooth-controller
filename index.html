@@ -7,22 +7,38 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1 class="title">Micro:bit Bluetooth Controller</h1>
+    <button id="connectBtn">Connect to Micro:bit</button>
+
     <div class="controller">
         <!-- Left Slider -->
         <input type="range" class="slider left-slider" orient="vertical">
 
-        <!-- Button Layout -->
-        <div class="buttons">
-            <div class="row">
-                <button class="btn" id="triangle">▲</button>
+        <!-- D-Pad & Buttons -->
+        <div class="controls">
+            <div class="dpad">
+                <button class="btn dpad-up">▲</button>
+                <div class="dpad-center">
+                    <button class="btn dpad-left">◀</button>
+                    <button class="btn dpad-right">▶</button>
+                </div>
+                <button class="btn dpad-down">▼</button>
             </div>
-            <div class="row">
-                <button class="btn" id="square">◼</button>
-                <button class="btn" id="circle">◯</button>
+
+            <div class="buttons">
+                <button class="btn square">◼</button>
+                <button class="btn triangle">▲</button>
+                <button class="btn circle">◯</button>
+                <button class="btn cross">✖</button>
             </div>
-            <div class="row">
-                <button class="btn" id="cross">✖</button>
-            </div>
+        </div>
+
+        <!-- Shoulder Buttons -->
+        <div class="shoulders">
+            <button class="btn shoulder-left">L1</button>
+            <button class="btn shoulder-right">R1</button>
+            <button class="btn shoulder-left-2">L2</button>
+            <button class="btn shoulder-right-2">R2</button>
         </div>
 
         <!-- Right Slider -->
