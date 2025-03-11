@@ -54,23 +54,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
-}
-
-.dpad-up, .dpad-down {
-    width: 50px;
-    height: 50px;
+    gap: 10px;
 }
 
 .dpad-horizontal {
     display: flex;
-    justify-content: space-between;
-    width: 120px; /* Ensures left and right buttons are properly spaced */
-}
-
-.dpad-left, .dpad-right {
-    width: 50px;
-    height: 50px;
+    gap: 10px;
 }
 
 /* Left Slider - Positioned in Middle-Left */
