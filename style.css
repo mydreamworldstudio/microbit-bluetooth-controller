@@ -14,27 +14,29 @@ html, body {
     text-align: center;
 }
 
-/* Title & Connect Button in One Row */
+/* Title & Connect Button (Centered, Bigger) */
 .header {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 10px 20px;
+    gap: 15px;
+    padding: 10px 0;
 }
 
 .title {
-    font-size: 2vh;
+    font-size: 3vh; /* Bigger Title */
     margin: 0;
 }
 
 #connectBtn {
-    font-size: 1.5vh;
-    padding: 10px;
+    font-size: 2vh; /* Bigger Button */
+    padding: 12px 20px;
     background-color: #00ffcc;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 /* Controller Layout */
@@ -70,7 +72,7 @@ html, body {
 .left-slider { margin-left: 3vw; }
 .right-slider { margin-right: 3vw; }
 
-/* D-Pad & Buttons Positioned Correctly */
+/* D-Pad & Action Buttons Positioned Correctly */
 .controls-container {
     display: flex;
     width: 60%;
@@ -78,35 +80,48 @@ html, body {
     align-items: center;
 }
 
-/* D-Pad */
+/* D-Pad (Bigger & Proper Layout) */
 .dpad {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 5px;
+    grid-template-areas:
+        ". up ."
+        "left center right"
+        ". down .";
+    gap: 10px;
     align-items: center;
     justify-items: center;
 }
 
-.dpad-center {
-    display: flex;
-    gap: 20px;
-}
+.dpad-up { grid-area: up; }
+.dpad-left { grid-area: left; }
+.dpad-right { grid-area: right; }
+.dpad-down { grid-area: down; }
 
-/* Buttons */
+/* Action Buttons (Mirrored Layout) */
 .buttons {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+        ". tri ."
+        "sq center cir"
+        ". cross .";
     gap: 10px;
+    align-items: center;
+    justify-items: center;
 }
 
-/* Button Styles */
+.triangle { grid-area: tri; }
+.square { grid-area: sq; }
+.circle { grid-area: cir; }
+.cross { grid-area: cross; }
+
+/* Bigger Buttons */
 .btn {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
+    width: 65px;
+    height: 65px;
+    font-size: 26px;
     color: #00ffcc;
     background: transparent;
-    border: 2px solid #00ffcc;
+    border: 3px solid #00ffcc;
     border-radius: 50%;
     cursor: pointer;
     transition: 0.2s;
