@@ -14,24 +14,24 @@ html, body {
     text-align: center;
 }
 
-/* Title & Connect Button (Centered, Bigger) */
+/* Title & Connect Button (Bigger & Centered) */
 .header {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 0px; /* Removed spacing */
     padding: 10px 0;
 }
 
 .title {
-    font-size: 3vh; /* Bigger Title */
+    font-size: 4vh; /* Increased Size */
     margin: 0;
 }
 
 #connectBtn {
-    font-size: 2vh; /* Bigger Button */
-    padding: 12px 20px;
+    font-size: 3vh; /* Bigger Button */
+    padding: 14px 22px;
     background-color: #00ffcc;
     border: none;
     border-radius: 8px;
@@ -72,7 +72,7 @@ html, body {
 .left-slider { margin-left: 3vw; }
 .right-slider { margin-right: 3vw; }
 
-/* D-Pad & Action Buttons Positioned Correctly */
+/* Controls Container */
 .controls-container {
     display: flex;
     width: 60%;
@@ -80,14 +80,14 @@ html, body {
     align-items: center;
 }
 
-/* D-Pad (Bigger & Proper Layout) */
+/* D-Pad (Fixed Layout, Closer Buttons) */
 .dpad {
     display: grid;
     grid-template-areas:
         ". up ."
         "left center right"
         ". down .";
-    gap: 10px;
+    gap: 5px; /* Reduced padding */
     align-items: center;
     justify-items: center;
 }
@@ -96,15 +96,16 @@ html, body {
 .dpad-left { grid-area: left; }
 .dpad-right { grid-area: right; }
 .dpad-down { grid-area: down; }
+.dpad-center { grid-area: center; display: none; } /* Hide center button if unused */
 
-/* Action Buttons (Mirrored Layout) */
+/* Action Buttons (Mirrored, Closer Together) */
 .buttons {
     display: grid;
     grid-template-areas:
         ". tri ."
         "sq center cir"
         ". cross .";
-    gap: 10px;
+    gap: 5px; /* Reduced padding */
     align-items: center;
     justify-items: center;
 }
