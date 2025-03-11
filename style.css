@@ -14,24 +14,24 @@ html, body {
     text-align: center;
 }
 
-/* Title & Connect Button (Bigger & Centered) */
+/* Title & Connect Button */
 .header {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0px; /* Removed spacing */
+    gap: 0px; /* No spacing */
     padding: 10px 0;
 }
 
 .title {
-    font-size: 4vh; /* Increased Size */
+    font-size: 28px; /* Bigger Title */
     margin: 0;
 }
 
 #connectBtn {
-    font-size: 3vh; /* Bigger Button */
-    padding: 14px 22px;
+    font-size: 22px; /* Bigger Button */
+    padding: 12px 24px;
     background-color: #00ffcc;
     border: none;
     border-radius: 8px;
@@ -80,40 +80,36 @@ html, body {
     align-items: center;
 }
 
-/* D-Pad (Fixed Layout, Closer Buttons) */
+/* D-Pad (Correct Arrangement) */
 .dpad {
     display: grid;
-    grid-template-areas:
-        ". up ."
-        "left center right"
-        ". down .";
-    gap: 5px; /* Reduced padding */
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px;
+    gap: 5px; /* Reduce spacing */
     align-items: center;
     justify-items: center;
 }
 
-.dpad-up { grid-area: up; }
-.dpad-left { grid-area: left; }
-.dpad-right { grid-area: right; }
-.dpad-down { grid-area: down; }
-.dpad-center { grid-area: center; display: none; } /* Hide center button if unused */
+.dpad-up    { grid-column: 2; grid-row: 1; }
+.dpad-left  { grid-column: 1; grid-row: 2; }
+.dpad-right { grid-column: 3; grid-row: 2; }
+.dpad-down  { grid-column: 2; grid-row: 3; }
+.dpad-center { grid-column: 2; grid-row: 2; display: none; } /* Hide center button */
 
-/* Action Buttons (Mirrored, Closer Together) */
+/* Action Buttons (Correct Mirroring) */
 .buttons {
     display: grid;
-    grid-template-areas:
-        ". tri ."
-        "sq center cir"
-        ". cross .";
-    gap: 5px; /* Reduced padding */
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px;
+    gap: 5px; /* Reduce spacing */
     align-items: center;
     justify-items: center;
 }
 
-.triangle { grid-area: tri; }
-.square { grid-area: sq; }
-.circle { grid-area: cir; }
-.cross { grid-area: cross; }
+.triangle { grid-column: 2; grid-row: 1; }
+.square   { grid-column: 1; grid-row: 2; }
+.circle   { grid-column: 3; grid-row: 2; }
+.cross    { grid-column: 2; grid-row: 3; }
 
 /* Bigger Buttons */
 .btn {
