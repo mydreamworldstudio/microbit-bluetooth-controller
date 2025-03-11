@@ -47,16 +47,17 @@ body {
     padding: 20px;
 }
 
-/* D-Pad on the Left */
+/* D-Pad Container (Left) */
 .dpad-container {
     position: absolute;
-    left: 50px;
+    left: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
 }
 
+/* D-Pad Buttons */
 .dpad-up, .dpad-down {
     width: 50px;
     height: 50px;
@@ -65,7 +66,7 @@ body {
 .dpad-horizontal {
     display: flex;
     justify-content: space-between;
-    width: 120px; /* Ensures left and right buttons are properly spaced */
+    width: 140px; /* Ensures proper spacing for left and right buttons */
 }
 
 .dpad-left, .dpad-right {
@@ -76,25 +77,47 @@ body {
 /* Left Slider - Positioned in Middle-Left */
 .left-slider {
     position: absolute;
-    left: 40%;
+    left: 30%;
     height: 36vh;
     width: 8px;
+    background: #444; /* Fix for missing track */
+    appearance: none;
+}
+
+.left-slider::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
 }
 
 /* Right Slider - Positioned in Middle-Right */
 .right-slider {
     position: absolute;
-    right: 40%;
+    right: 30%;
     height: 36vh;
     width: 8px;
+    background: #444; /* Fix for missing track */
+    appearance: none;
 }
 
-/* Action Buttons on the Right */
+.right-slider::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Action Buttons (Right Side) */
 .buttons {
     position: absolute;
-    right: 50px;
-    display: flex;
-    flex-direction: column;
+    right: 80px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Arrange buttons in a 2x2 grid */
     gap: 10px;
 }
 
