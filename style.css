@@ -1,138 +1,149 @@
-* {
+/* Full-Screen Landscape Mode */
+html, body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background-color: #111;
-    color: white;
-    font-family: Arial, sans-serif;
-    overflow: hidden; /* Prevent scrolling */
+    background-color: #121212;
+    color: #00ffcc;
+    text-align: center;
 }
 
 /* Title & Connect Button */
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Space between title & button */
     padding: 10px 0;
 }
 
 .title {
-    font-size: 24px;
+    font-size: 28px; /* Bigger Title */
+    margin: 0;
 }
 
 #connectBtn {
-    font-size: 18px;
-    padding: 8px 15px;
+    font-size: 22px; /* Bigger Button */
+    padding: 12px 24px;
+    background-color: #00ffcc;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 /* Controller Layout */
 .controller {
-    position: relative;
-    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90vw;
     height: 80vh;
+}
+
+/* Sliders */
+.slider {
+    -webkit-appearance: none;
+    writing-mode: vertical-lr;
+    width: 8px;
+    height: 36vh;
+    background: linear-gradient(180deg, #00ffcc, #0077ff);
+    border-radius: 4px;
+    outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* New Layout with Correct Positions */
+.layout {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    height: 100%;
     padding: 20px;
 }
 
-/* D-Pad Container (Left) */
-.dpad-container {
-    position: absolute;
-    left: 80px;
+/* Grouping Elements */
+.left-section {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 5px;
+    gap: 20px; /* Space between dpad and left slider */
 }
 
-/* D-Pad Buttons */
-.dpad-up, .dpad-down {
-    width: 50px;
-    height: 50px;
-}
-
-.dpad-horizontal {
+.middle-section {
     display: flex;
-    justify-content: space-between;
-    width: 140px; /* Ensures proper spacing for left and right buttons */
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* Space between sliders */
 }
 
-.dpad-left, .dpad-right {
-    width: 50px;
-    height: 50px;
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between right slider and buttons */
 }
 
-/* Left Slider - Positioned in Middle-Left */
-.left-slider {
-    position: absolute;
-    left: 30%;
-    height: 36vh;
-    width: 8px;
-    background: #444; /* Fix for missing track */
-    appearance: none;
+/* D-Pad (Left Side) */
+.dpad {
+    display: grid;
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px;
+    gap: 5px; /* Reduce spacing */
+    align-items: center;
+    justify-items: center;
 }
 
-.left-slider::-webkit-slider-thumb {
-    width: 20px;
-    height: 20px;
-    background: white;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-}
-
-/* Right Slider - Positioned in Middle-Right */
-.right-slider {
-    position: absolute;
-    right: 30%;
-    height: 36vh;
-    width: 8px;
-    background: #444; /* Fix for missing track */
-    appearance: none;
-}
-
-.right-slider::-webkit-slider-thumb {
-    width: 20px;
-    height: 20px;
-    background: white;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-}
+/* Correct Grid Placement */
+.dpad-up    { grid-column: 2; grid-row: 1; } /* Top Center */
+.dpad-left  { grid-column: 1; grid-row: 2; } /* Middle Left */
+.dpad-right { grid-column: 3; grid-row: 2; } /* Middle Right */
+.dpad-down  { grid-column: 2; grid-row: 3; } /* Bottom Center */
 
 /* Action Buttons (Right Side) */
 .buttons {
-    position: absolute;
-    right: 80px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Arrange buttons in a 2x2 grid */
-    gap: 10px;
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px;
+    gap: 5px; /* Reduce spacing */
+    align-items: center;
+    justify-items: center;
 }
 
-/* Button Styles */
+/* Correct Grid Placement */
+.triangle { grid-column: 2; grid-row: 1; }
+.square   { grid-column: 1; grid-row: 2; }
+.circle   { grid-column: 3; grid-row: 2; }
+.cross    { grid-column: 2; grid-row: 3; }
+
+/* Bigger Buttons */
 .btn {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    border: none;
-    background-color: #333;
-    color: white;
-    border-radius: 10px;
+    width: 65px;
+    height: 65px;
+    font-size: 26px;
+    color: #00ffcc;
+    background: transparent;
+    border: 3px solid #00ffcc;
+    border-radius: 50%;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 .btn:active {
-    background-color: #555;
+    background: #00ffcc;
+    color: #121212;
 }
