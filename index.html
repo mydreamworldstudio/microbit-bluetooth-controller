@@ -2,13 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Micro:bit Bluetooth Controller</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Micro:bit Bluetooth Controller</h1>
-    <button id="connectBtn">Connect to Micro:bit</button>
+    <div class="controller">
+        <!-- Left Slider -->
+        <input type="range" class="slider left-slider" orient="vertical">
+
+        <!-- Button Layout -->
+        <div class="buttons">
+            <div class="row">
+                <button class="btn" id="triangle">▲</button>
+            </div>
+            <div class="row">
+                <button class="btn" id="square">◼</button>
+                <button class="btn" id="circle">◯</button>
+            </div>
+            <div class="row">
+                <button class="btn" id="cross">✖</button>
+            </div>
+        </div>
+
+        <!-- Right Slider -->
+        <input type="range" class="slider right-slider" orient="vertical">
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
