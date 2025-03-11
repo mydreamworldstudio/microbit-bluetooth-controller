@@ -50,7 +50,7 @@ body {
 /* D-Pad on the Left */
 .dpad-container {
     position: absolute;
-    left: 50px;
+    left: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,13 +59,19 @@ body {
 
 .dpad-horizontal {
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+    width: 120px; /* Ensure left and right buttons are spaced properly */
+}
+
+.dpad-container .btn {
+    width: 60px;
+    height: 60px;
 }
 
 /* Left Slider - Positioned in Middle-Left */
 .left-slider {
     position: absolute;
-    left: 40%;
+    left: 30%;
     height: 36vh;
     width: 8px;
 }
@@ -73,7 +79,7 @@ body {
 /* Right Slider - Positioned in Middle-Right */
 .right-slider {
     position: absolute;
-    right: 40%;
+    right: 30%;
     height: 36vh;
     width: 8px;
 }
@@ -81,7 +87,7 @@ body {
 /* Action Buttons on the Right */
 .buttons {
     position: absolute;
-    right: 50px;
+    right: 80px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -89,8 +95,8 @@ body {
 
 /* Button Styles */
 .btn {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     font-size: 24px;
     border: none;
     background-color: #333;
