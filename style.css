@@ -80,7 +80,7 @@ html, body {
     align-items: center;
 }
 
-/* D-Pad (Corrected Layout) */
+/* D-Pad (Final Correct Layout) */
 .dpad {
     display: grid;
     grid-template-columns: 50px 50px 50px;
@@ -90,6 +90,7 @@ html, body {
     justify-items: center;
 }
 
+/* Correct Grid Placement */
 .dpad-up    { grid-column: 2; grid-row: 1; } /* Top Center */
 .dpad-left  { grid-column: 1; grid-row: 2; } /* Middle Left */
 .dpad-right { grid-column: 3; grid-row: 2; } /* Middle Right */
