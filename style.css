@@ -14,13 +14,20 @@ html, body {
     text-align: center;
 }
 
-/* Title */
+/* Title & Connect Button */
+.header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+
 .title {
     font-size: 2vh;
     margin: 5px 0;
 }
 
-/* Connect Button */
 #connectBtn {
     font-size: 1.5vh;
     padding: 10px;
@@ -36,7 +43,7 @@ html, body {
     justify-content: space-between;
     align-items: center;
     width: 90vw;
-    height: 75vh;
+    height: 80vh;
 }
 
 /* Sliders */
@@ -63,7 +70,7 @@ html, body {
 .left-slider { margin-left: 3vw; }
 .right-slider { margin-right: 3vw; }
 
-/* D-Pad & Button Layout */
+/* Controls (D-Pad & Buttons) */
 .controls {
     display: flex;
     flex-direction: column;
@@ -90,16 +97,6 @@ html, body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-}
-
-/* Shoulder Buttons */
-.shoulders {
-    position: absolute;
-    top: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
 }
 
 .btn {
