@@ -14,22 +14,25 @@
     </div>
 
     <!-- Controller Layout -->
-    <div class="controller">
-        <!-- Left Slider -->
-        <input type="range" class="slider left-slider" orient="vertical">
-
-        <!-- D-Pad & Action Buttons Container -->
-        <div class="controls-container">
-            <!-- D-Pad -->
-           <div class="dpad">
+    <div class="layout">
+        <!-- Left Side: D-Pad + Left Slider -->
+        <div class="left-section">
+            <div class="dpad">
                 <button class="btn dpad-up">▲</button>
                 <button class="btn dpad-left">◀</button>
                 <button class="btn dpad-right">▶</button>
                 <button class="btn dpad-down">▼</button>
             </div>
+            <input type="range" class="slider left-slider" orient="vertical">
+        </div>
 
+        <!-- Middle Section: Right Slider -->
+        <div class="middle-section">
+            <input type="range" class="slider right-slider" orient="vertical">
+        </div>
 
-            <!-- Action Buttons -->
+        <!-- Right Side: Action Buttons -->
+        <div class="right-section">
             <div class="buttons">
                 <button class="btn square">◼</button>
                 <button class="btn triangle">▲</button>
@@ -37,9 +40,6 @@
                 <button class="btn cross">✖</button>
             </div>
         </div>
-
-        <!-- Right Slider -->
-        <input type="range" class="slider right-slider" orient="vertical">
     </div>
 
     <script src="script.js"></script>
