@@ -80,7 +80,7 @@ html, body {
     align-items: center;
 }
 
-/* D-Pad (Correct Arrangement) */
+/* D-Pad (Corrected Layout) */
 .dpad {
     display: grid;
     grid-template-columns: 50px 50px 50px;
@@ -90,11 +90,12 @@ html, body {
     justify-items: center;
 }
 
-.dpad-up    { grid-column: 2; grid-row: 1; }
-.dpad-left  { grid-column: 1; grid-row: 2; }
-.dpad-right { grid-column: 3; grid-row: 2; }
-.dpad-down  { grid-column: 2; grid-row: 3; }
+.dpad-up    { grid-column: 2; grid-row: 1; } /* Top Center */
+.dpad-left  { grid-column: 1; grid-row: 2; } /* Middle Left */
+.dpad-right { grid-column: 3; grid-row: 2; } /* Middle Right */
+.dpad-down  { grid-column: 2; grid-row: 3; } /* Bottom Center */
 .dpad-center { grid-column: 2; grid-row: 2; display: none; } /* Hide center button */
+
 
 /* Action Buttons (Correct Mirroring) */
 .buttons {
