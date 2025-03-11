@@ -1,4 +1,4 @@
-/* Force Full-Screen Landscape Mode */
+/* Full-Screen Landscape Mode */
 html, body {
     margin: 0;
     padding: 0;
@@ -6,9 +6,28 @@ html, body {
     width: 100vw;
     overflow: hidden;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: #121212;
+    color: #00ffcc;
+    text-align: center;
+}
+
+/* Title */
+.title {
+    font-size: 2vh;
+    margin: 5px 0;
+}
+
+/* Connect Button */
+#connectBtn {
+    font-size: 1.5vh;
+    padding: 10px;
+    background-color: #00ffcc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 /* Controller Layout */
@@ -17,7 +36,7 @@ html, body {
     justify-content: space-between;
     align-items: center;
     width: 90vw;
-    height: 90vh;
+    height: 75vh;
 }
 
 /* Sliders */
@@ -41,19 +60,46 @@ html, body {
 }
 
 /* Left and Right Sliders */
-.left-slider { margin-left: 5vw; }
-.right-slider { margin-right: 5vw; }
+.left-slider { margin-left: 3vw; }
+.right-slider { margin-right: 3vw; }
+
+/* D-Pad & Button Layout */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* D-Pad */
+.dpad {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    align-items: center;
+    justify-items: center;
+}
+
+.dpad-center {
+    display: flex;
+    gap: 20px;
+}
 
 /* Buttons */
 .buttons {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    justify-items: center;
 }
 
-.row {
+/* Shoulder Buttons */
+.shoulders {
+    position: absolute;
+    top: 10px;
+    width: 100%;
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+    padding: 0 20px;
 }
 
 .btn {
