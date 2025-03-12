@@ -12,11 +12,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Title & Connect Buttons -->
+    <!-- Title & Connect Button -->
     <div class="header">
         <h1 class="title">Micro:bit Bluetooth Controller</h1>
-        <button id="connectBtn">Connect</button>
-        <button id="disconnectBtn">Disconnect</button>  <!-- ✅ Added missing button -->
+        <button id="connectBtn">Connect</button>  <!-- ✅ Removed Disconnect Button -->
     </div>
 
     <!-- Controller Layout -->
@@ -33,8 +32,8 @@
 
         <!-- Middle Section: Sliders -->
         <div class="middle-section">
-            <input type="range" class="slider left-slider" min="0" max="100" value="50" orient="vertical">  <!-- ✅ Fixed -->
-            <input type="range" class="slider right-slider" min="0" max="100" value="50" orient="vertical"> <!-- ✅ Fixed -->
+            <input type="range" class="slider left-slider" min="0" max="100" value="50" orient="vertical">
+            <input type="range" class="slider right-slider" min="0" max="100" value="50" orient="vertical">
         </div>
 
         <!-- Right Section: Action Buttons -->
