@@ -100,25 +100,48 @@ html, body {
     gap: 30px;
 }
 
-/* D-Pad: PS4 Style Diamond Shape */
+/* D-Pad: Perfect Diamond Shape (PS4 Style) */
 .dpad {
     display: grid;
-    grid-template-columns: 65px 65px 65px;
-    grid-template-rows: 65px 65px 65px;
-    align-items: center;
-    justify-items: center;
-    gap: 10px; /* Ensures proper spacing */
+    grid-template-columns: 70px 70px 70px;
+    grid-template-rows: 70px 70px 70px;
+    gap: 0px; /* Ensure no extra space */
     position: relative;
 }
 
-/* Adjust individual button positions */
-.dpad-up    { grid-column: 2; grid-row: 1; } /* Top */
-.dpad-left  { grid-column: 1; grid-row: 2; } /* Left */
-.dpad-right { grid-column: 3; grid-row: 2; } /* Right */
-.dpad-down  { grid-column: 2; grid-row: 3; } /* Bottom */
-.dpad-center { grid-column: 2; grid-row: 2; display: none; } /* Hidden center button */
+/* Arrange buttons properly in diamond shape */
+.dpad-up {
+    grid-column: 2;
+    grid-row: 1;
+    transform: translateY(10px); /* Move slightly downward */
+}
 
-/* Consistent button size */
+.dpad-left {
+    grid-column: 1;
+    grid-row: 2;
+    transform: translateX(10px); /* Move slightly right */
+}
+
+.dpad-right {
+    grid-column: 3;
+    grid-row: 2;
+    transform: translateX(-10px); /* Move slightly left */
+}
+
+.dpad-down {
+    grid-column: 2;
+    grid-row: 3;
+    transform: translateY(-10px); /* Move slightly upward */
+}
+
+/* Hide center button */
+.dpad-center {
+    grid-column: 2;
+    grid-row: 2;
+    display: none;
+}
+
+/* Button Styling */
 .btn {
     width: 65px;
     height: 65px;
@@ -136,6 +159,7 @@ html, body {
     background: #00ffcc;
     color: #121212;
 }
+
 
 
 /* 🎮 PS4-Style Action Buttons (Mirrored D-Pad) */
