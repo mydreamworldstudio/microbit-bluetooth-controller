@@ -56,7 +56,7 @@ html, body {
     width: 30%;
 }
 
-/* 🎮 D-Pad: Adjusted for Closer Buttons */
+/* 🎮 D-Pad (Buttons Closer) */
 .dpad {
     display: grid;
     grid-template-columns: 65px 65px 65px;
@@ -68,25 +68,10 @@ html, body {
 }
 
 /* Adjust Button Placement (Closer) */
-.dpad-up {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-.dpad-left {
-    grid-column: 1;
-    grid-row: 2;
-}
-
-.dpad-right {
-    grid-column: 3;
-    grid-row: 2;
-}
-
-.dpad-down {
-    grid-column: 2;
-    grid-row: 3;
-}
+.dpad-up { grid-column: 2; grid-row: 1; }
+.dpad-left { grid-column: 1; grid-row: 2; }
+.dpad-right { grid-column: 3; grid-row: 2; }
+.dpad-down { grid-column: 2; grid-row: 3; }
 
 /* 🎮 Button Styling */
 .btn {
@@ -113,23 +98,22 @@ html, body {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 50%;
     width: 100%;
-    transform: translateY(-50%);
+    height: 100%;
 }
 
 /* 🕹 Left Slider (30% from Left Edge, Centered Vertically) */
 .left-slider {
     position: absolute;
-    left: 30%;
+    left: 28%;  /* Adjusted to avoid overlapping */
     top: 50%;
     transform: translateY(-50%);
 }
 
-/* 🕹 Right Slider (30% from Right Edge, Centered Vertically) */
+/* 🕹 Right Slider (30% from Right Edge, Centered Vertically, Fixed Overlap) */
 .right-slider {
     position: absolute;
-    right: 30%;
+    right: 28%;  /* Adjusted to avoid overlapping */
     top: 50%;
     transform: translateY(-50%);
 }
