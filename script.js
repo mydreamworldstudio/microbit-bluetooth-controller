@@ -24,8 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             rxCharacteristic = await service.getCharacteristic("6e400003-b5a3-f393-e0a9-e50e24dcca9e");
 
             console.log("Bluetooth Connection Successful");
-
-            document.getElementById("robotShow")?.classList.add("robotShow_connected");
+            updateUI(true);
 
             // Enable Notifications
             txCharacteristic.startNotifications();
@@ -35,15 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         } catch (error) {
             console.error("Connection failed:", error);
-        }
-    }
-
-    function disconnectMicrobit() {
-        if (!uBitDevice) return;
-
-        if (uBitDevice.gatt.connected) {
-            uBitDevice.gatt.disconnect();
-            console.log("Disconnected");
         }
     }
 
@@ -74,10 +64,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function onDisconnected(event) {
         console.log(`Device ${event.target.name} is disconnected.`);
-        document.getElementById("robotShow")?.classList.remove("robotShow_connected");
+        updateUI(false);
     }
 
-    // 🎮 Button Handling
+    function updateUI(connected) {
+        document.getElementById("connectBtn").disabled = connected;
+
+        document.querySelectorAll(".btn, .slider").forEach(el => {
+            el.disabled = !connected;
+        });
+
+        document.getElementById("robotShow")?.classList.toggle("robotShow_connected", connected);
+    }
+
+    // 🎮 Button Handling with Debounce
     const buttonMap = {
         "dpad-up": "UP",
         "dpad-down": "DOWN",
@@ -89,10 +89,18 @@ document.addEventListener("DOMContentLoaded", function () {
         "cross": "X"
     };
 
+    let buttonCooldown = false;
+    function sendButtonCommand(command) {
+        if (buttonCooldown) return;
+        buttonCooldown = true;
+        sendUART(command);
+        setTimeout(() => buttonCooldown = false, 100); // 100ms debounce
+    }
+
     document.querySelectorAll(".btn").forEach(button => {
         button.addEventListener("mousedown", () => {
             const command = buttonMap[button.classList[1]];
-            if (command) sendUART(command);
+            if (command) sendButtonCommand(command);
         });
 
         button.addEventListener("mouseup", () => {
@@ -100,12 +108,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 🎚 Slider Handling
+    // 🎚 Slider Handling with Throttling
+    let lastSentLeft = 50, lastSentRight = 50;
+    
+    function sendSliderCommand(side, value) {
+        if (side === "L" && Math.abs(value - lastSentLeft) < 5) return;
+        if (side === "R" && Math.abs(value - lastSentRight) < 5) return;
+        
+        sendUART(`${side}_${value}`);
+        if (side === "L") lastSentLeft = value;
+        if (side === "R") lastSentRight = value;
+    }
+
     document.querySelector(".left-slider").addEventListener("input", event => {
-        sendUART(`L_${event.target.value}`);
+        sendSliderCommand("L", event.target.value);
     });
 
     document.querySelector(".right-slider").addEventListener("input", event => {
-        sendUART(`R_${event.target.value}`);
+        sendSliderCommand("R", event.target.value);
     });
 });
