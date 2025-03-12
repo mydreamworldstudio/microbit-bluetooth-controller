@@ -116,36 +116,36 @@ html, body {
 /* 🎮 D-Pad: Perfect Diamond Shape (PS4 Style) */
 .dpad {
     display: grid;
-    grid-template-columns: 70px 70px 70px;
-    grid-template-rows: 70px 70px 70px;
+    grid-template-columns: 80px 80px 80px;  /* Increased for better spacing */
+    grid-template-rows: 80px 80px 80px;
     position: relative;
-    width: 210px;
-    height: 210px;
+    width: 240px; /* Increased to match grid */
+    height: 240px;
 }
 
 /* Arrange buttons properly in diamond shape */
 .dpad-up {
     grid-column: 2;
     grid-row: 1;
-    transform: translateY(10px);
+    transform: translateY(15px);  /* Increased spacing */
 }
 
 .dpad-left {
     grid-column: 1;
     grid-row: 2;
-    transform: translateX(10px);
+    transform: translateX(15px);
 }
 
 .dpad-right {
     grid-column: 3;
     grid-row: 2;
-    transform: translateX(-10px);
+    transform: translateX(-15px);
 }
 
 .dpad-down {
     grid-column: 2;
     grid-row: 3;
-    transform: translateY(-10px);
+    transform: translateY(-15px);
 }
 
 /* Hide center button */
@@ -174,8 +174,8 @@ html, body {
 
 /* Button Styling */
 .btn {
-    width: 65px;
-    height: 65px;
+    width: 70px; /* Slightly bigger buttons */
+    height: 70px;
     font-size: 26px;
     color: #00ffcc;
     background: transparent;
