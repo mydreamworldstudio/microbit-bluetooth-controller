@@ -46,9 +46,10 @@ html, body {
     align-items: center;
     width: 90vw;
     height: 80vh;
+    position: relative; /* Ensures absolute positioning works */
 }
 
-/* Sliders */
+/* 🎚 Sliders - Positioned Correctly */
 .slider {
     -webkit-appearance: none;
     writing-mode: vertical-lr;
@@ -57,8 +58,20 @@ html, body {
     background: linear-gradient(180deg, #00ffcc, #0077ff);
     border-radius: 4px;
     outline: none;
+    position: absolute;
 }
 
+/* Left Slider - Positioned in Middle-Left */
+.left-slider {
+    left: 30vw; /* 30% from the left edge */
+}
+
+/* Right Slider - Positioned in Middle-Right */
+.right-slider {
+    right: 30vw; /* 30% from the right edge */
+}
+
+/* Thumb (Slider Handle) */
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 20px;
@@ -78,14 +91,14 @@ html, body {
     padding: 20px;
 }
 
-/* Left Section (D-Pad + Left Slider) */
+/* 🎮 Left Section (D-Pad + Left Slider) */
 .left-section {
     display: flex;
     align-items: center;
     gap: 30px;
 }
 
-/* Middle Section (Sliders) */
+/* 🎮 Middle Section (Sliders) */
 .middle-section {
     display: flex;
     align-items: center;
@@ -93,45 +106,46 @@ html, body {
     gap: 20px;
 }
 
-/* Right Section (Right Slider + Action Buttons) */
+/* 🎮 Right Section (Right Slider + Action Buttons) */
 .right-section {
     display: flex;
     align-items: center;
     gap: 30px;
 }
 
-/* D-Pad: Perfect Diamond Shape (PS4 Style) */
+/* 🎮 D-Pad: Perfect Diamond Shape (PS4 Style) */
 .dpad {
     display: grid;
     grid-template-columns: 70px 70px 70px;
     grid-template-rows: 70px 70px 70px;
-    gap: 0px; /* Ensure no extra space */
     position: relative;
+    width: 210px;
+    height: 210px;
 }
 
 /* Arrange buttons properly in diamond shape */
 .dpad-up {
     grid-column: 2;
     grid-row: 1;
-    transform: translateY(10px); /* Move slightly downward */
+    transform: translateY(10px);
 }
 
 .dpad-left {
     grid-column: 1;
     grid-row: 2;
-    transform: translateX(10px); /* Move slightly right */
+    transform: translateX(10px);
 }
 
 .dpad-right {
     grid-column: 3;
     grid-row: 2;
-    transform: translateX(-10px); /* Move slightly left */
+    transform: translateX(-10px);
 }
 
 .dpad-down {
     grid-column: 2;
     grid-row: 3;
-    transform: translateY(-10px); /* Move slightly upward */
+    transform: translateY(-10px);
 }
 
 /* Hide center button */
@@ -140,6 +154,23 @@ html, body {
     grid-row: 2;
     display: none;
 }
+
+/* 🎮 PS4-Style Action Buttons (Mirrored D-Pad) */
+.buttons {
+    display: grid;
+    grid-template-columns: 60px 60px 60px;
+    grid-template-rows: 60px 60px 60px;
+    gap: 5px;
+    align-items: center;
+    justify-items: center;
+}
+
+/* Correct Placement - Mirroring D-Pad */
+.triangle { grid-column: 2; grid-row: 1; } /* Top */
+.square   { grid-column: 1; grid-row: 2; } /* Left */
+.circle   { grid-column: 3; grid-row: 2; } /* Right */
+.cross    { grid-column: 2; grid-row: 3; } /* Bottom */
+.action-center { grid-column: 2; grid-row: 2; display: none; } /* Hide center */
 
 /* Button Styling */
 .btn {
@@ -159,22 +190,3 @@ html, body {
     background: #00ffcc;
     color: #121212;
 }
-
-
-
-/* 🎮 PS4-Style Action Buttons (Mirrored D-Pad) */
-.buttons {
-    display: grid;
-    grid-template-columns: 60px 60px 60px;
-    grid-template-rows: 60px 60px 60px;
-    gap: 5px;
-    align-items: center;
-    justify-items: center;
-}
-
-/* Correct Placement - Mirroring D-Pad */
-.triangle { grid-column: 2; grid-row: 1; } /* Top */
-.square   { grid-column: 1; grid-row: 2; } /* Left */
-.circle   { grid-column: 3; grid-row: 2; } /* Right */
-.cross    { grid-column: 2; grid-row: 3; } /* Bottom */
-.action-center { grid-column: 2; grid-row: 2; display: none; } /* Hide center */
