@@ -1,53 +1,40 @@
-window.onload = function () {
-    console.log("Page Loaded - Script Running");
-
-    function enableFullScreen() {
-        if (document.documentElement.requestFullscreen) {
-            document.documentElement.requestFullscreen();
-        } else if (document.documentElement.mozRequestFullScreen) {
-            document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullscreen) {
-            document.documentElement.webkitRequestFullscreen();
-        } else if (document.documentElement.msRequestFullscreen) {
-            document.documentElement.msRequestFullscreen();
-        }
-    }
-
-    const UART_SERVICE_UUID = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
-    const UART_TX_CHARACTERISTIC_UUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
-    const UART_RX_CHARACTERISTIC_UUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
-
+document.addEventListener("DOMContentLoaded", function () {
     let uBitDevice;
     let rxCharacteristic;
 
+    // Ensure Bluetooth connection is triggered by user gesture
+    document.getElementById("connectBtn").addEventListener("click", connectMicrobit);
+
     async function connectMicrobit() {
         try {
-            enableFullScreen();
             console.log("Requesting Bluetooth Device...");
             uBitDevice = await navigator.bluetooth.requestDevice({
                 filters: [{ namePrefix: "BBC micro:bit" }],
-                optionalServices: [UART_SERVICE_UUID]
+                optionalServices: ["6e400001-b5a3-f393-e0a9-e50e24dcca9e"] // UART service
             });
-
-            uBitDevice.addEventListener('gattserverdisconnected', onDisconnected);
 
             console.log("Connecting to GATT Server...");
             const server = await uBitDevice.gatt.connect();
 
             console.log("Getting Service...");
-            const service = await server.getPrimaryService(UART_SERVICE_UUID);
+            const service = await server.getPrimaryService("6e400001-b5a3-f393-e0a9-e50e24dcca9e");
 
             console.log("Getting Characteristics...");
-            const txCharacteristic = await service.getCharacteristic(UART_TX_CHARACTERISTIC_UUID);
+            const txCharacteristic = await service.getCharacteristic("6e400002-b5a3-f393-e0a9-e50e24dcca9e");
+            rxCharacteristic = await service.getCharacteristic("6e400003-b5a3-f393-e0a9-e50e24dcca9e");
+
+            console.log("Bluetooth Connection Successful");
+
+            document.getElementById("robotShow")?.classList.add("robotShow_connected");
+
+            // Enable Notifications
             txCharacteristic.startNotifications();
             txCharacteristic.addEventListener("characteristicvaluechanged", onTxCharacteristicValueChanged);
 
-            rxCharacteristic = await service.getCharacteristic(UART_RX_CHARACTERISTIC_UUID);
-            console.log("Micro:bit Connected!");
+            uBitDevice.addEventListener('gattserverdisconnected', onDisconnected);
 
-            document.getElementById('robotShow').classList.add("robotShow_connected");
         } catch (error) {
-            console.log("Connection failed:", error);
+            console.error("Connection failed:", error);
         }
     }
 
@@ -56,27 +43,24 @@ window.onload = function () {
 
         if (uBitDevice.gatt.connected) {
             uBitDevice.gatt.disconnect();
-            console.log("Disconnected from Micro:bit");
+            console.log("Disconnected");
         }
     }
 
-    function onDisconnected(event) {
-        console.warn("Micro:bit Disconnected");
-        document.getElementById('robotShow').classList.remove("robotShow_connected");
+    async function sendUART(command) {
+        if (!rxCharacteristic) return;
+        let encoder = new TextEncoder();
+        queueGattOperation(() => 
+            rxCharacteristic.writeValue(encoder.encode(command + "\n"))
+                .then(() => console.log("Sent:", command))
+                .catch(error => console.error("Error sending data:", error))
+        );
     }
 
-    async function sendUART(data) {
-        if (!rxCharacteristic) {
-            console.warn("Not connected to micro:bit.");
-            return;
-        }
-        try {
-            let encoder = new TextEncoder();
-            await rxCharacteristic.writeValue(encoder.encode(data + "\n"));
-            console.log("Sent:", data);
-        } catch (error) {
-            console.error("Error sending data:", error);
-        }
+    let queue = Promise.resolve();
+    function queueGattOperation(operation) {
+        queue = queue.then(operation, operation);
+        return queue;
     }
 
     function onTxCharacteristicValueChanged(event) {
@@ -85,21 +69,15 @@ window.onload = function () {
             receivedData[i] = event.target.value.getUint8(i);
         }
         const receivedString = String.fromCharCode.apply(null, receivedData);
-        console.log("Received from micro:bit:", receivedString);
+        console.log("Received:", receivedString);
     }
 
-    // Ensure Buttons Exist Before Attaching Events
-    let connectBtn = document.getElementById("connectBtn");
-    let disconnectBtn = document.getElementById("disconnectBtn");
-
-    if (connectBtn && disconnectBtn) {
-        connectBtn.addEventListener("click", connectMicrobit);
-        disconnectBtn.addEventListener("click", disconnectMicrobit);
-    } else {
-        console.warn("Connect/Disconnect buttons not found!");
+    function onDisconnected(event) {
+        console.log(`Device ${event.target.name} is disconnected.`);
+        document.getElementById("robotShow")?.classList.remove("robotShow_connected");
     }
 
-    // Button Mapping
+    // 🎮 Button Handling
     const buttonMap = {
         "dpad-up": "UP",
         "dpad-down": "DOWN",
@@ -111,30 +89,23 @@ window.onload = function () {
         "cross": "X"
     };
 
-    document.querySelectorAll(".dpad button, .buttons button").forEach(button => {
-        button.addEventListener("mousedown", function () {
-            let command = buttonMap[this.classList[1]] || "UNKNOWN";
-            console.log(command);
-            sendUART(command);
+    document.querySelectorAll(".btn").forEach(button => {
+        button.addEventListener("mousedown", () => {
+            const command = buttonMap[button.classList[1]];
+            if (command) sendUART(command);
         });
 
-        button.addEventListener("mouseup", function () {
-            console.log("STOP");
+        button.addEventListener("mouseup", () => {
             sendUART("STOP");
         });
     });
 
-    // Slider Input
-    document.querySelectorAll(".slider").forEach(slider => {
-        slider.addEventListener("input", function () {
-            let command = this.classList.contains("left-slider") ? `L_${this.value}` : `R_${this.value}`;
-            console.log(command);
-            sendUART(command);
-        });
+    // 🎚 Slider Handling
+    document.querySelector(".left-slider").addEventListener("input", event => {
+        sendUART(`L_${event.target.value}`);
     });
 
-    // Prevent Scrolling
-    window.addEventListener("touchmove", function (event) {
-        event.preventDefault();
-    }, { passive: false });
-};
+    document.querySelector(".right-slider").addEventListener("input", event => {
+        sendUART(`R_${event.target.value}`);
+    });
+});
