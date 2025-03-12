@@ -1,45 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Micro:bit Bluetooth Controller</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Title & Connect Button -->
-    <div class="header">
-        <h1 class="title">Micro:bit Bluetooth Controller</h1>
-        <button id="connectBtn">Connect</button>
+<!-- Controller Layout -->
+<div class="controller">
+    <!-- D-Pad on the Left -->
+    <div class="dpad">
+        <button class="btn dpad-up">▲</button>
+        <button class="btn dpad-left">◀</button>
+        <button class="btn dpad-right">▶</button>
+        <button class="btn dpad-down">▼</button>
+        <button class="btn dpad-center"></button> <!-- Hidden -->
     </div>
 
-    <!-- Controller Layout -->
-    <div class="controller">
-        <!-- D-Pad on the Left -->
-        <div class="dpad-container">
-            <button class="btn dpad-up">▲</button>
-            <div class="dpad-horizontal">
-                <button class="btn dpad-left">◀</button>
-                <button class="btn dpad-right">▶</button>
-            </div>
-            <button class="btn dpad-down">▼</button>
-        </div>
+    <!-- Left Slider in the Middle-Left -->
+    <input type="range" class="slider left-slider" orient="vertical">
 
-        <!-- Left Slider in the Middle-Left -->
-        <input type="range" class="slider left-slider" orient="vertical">
+    <!-- Right Slider in the Middle-Right -->
+    <input type="range" class="slider right-slider" orient="vertical">
 
-        <!-- Right Slider in the Middle-Right -->
-        <input type="range" class="slider right-slider" orient="vertical">
-
-        <!-- Action Buttons on the Right -->
-        <div class="buttons">
-            <button class="btn square">◼</button>
-            <button class="btn triangle">▲</button>
-            <button class="btn circle">◯</button>
-            <button class="btn cross">✖</button>
-        </div>
+    <!-- Action Buttons on the Right -->
+    <div class="buttons">
+        <button class="btn square">◼</button>
+        <button class="btn triangle">▲</button>
+        <button class="btn circle">◯</button>
+        <button class="btn cross">✖</button>
     </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
+</div>
