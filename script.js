@@ -1,11 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     let device, server, service, txCharacteristic, rxCharacteristic;
     let isSending = false; // Prevent multiple send operations
+    let isConnecting = false; // Prevent multiple connection attempts
 
     // Ensure Bluetooth connection is triggered by user gesture
     document.getElementById("connectBtn").addEventListener("click", connectMicrobit);
 
     async function connectMicrobit() {
+        if (isConnecting) return; // Prevent multiple connection attempts
+        isConnecting = true;
+
         try {
             console.log("Requesting Bluetooth Device...");
             device = await navigator.bluetooth.requestDevice({
@@ -27,16 +31,18 @@ document.addEventListener("DOMContentLoaded", function () {
             rxCharacteristic = await service.getCharacteristic("6e400003-b5a3-f393-e0a9-e50e24dcca9e");
 
             // Enable notifications for receiving data
-            rxCharacteristic.addEventListener("characteristicvaluechanged", onTxCharacteristicValueChanged);
+            rxCharacteristic.addEventListener("characteristicvaluechanged", onRxCharacteristicValueChanged);
             await rxCharacteristic.startNotifications();
 
             console.log("Bluetooth Connection Successful");
         } catch (error) {
             console.error("Connection failed:", error);
+        } finally {
+            isConnecting = false; // Allow reconnection if failed
         }
     }
 
-    function onTxCharacteristicValueChanged(event) {
+    function onRxCharacteristicValueChanged(event) {
         let value = new TextDecoder().decode(event.target.value);
         console.log("Received:", value);
     }
