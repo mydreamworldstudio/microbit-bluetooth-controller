@@ -1,0 +1,8 @@
+{
+    "name": "Microbit Bluetooth Controller",
+    "short_name": "Microbit Controller",
+    "display": "standalone",
+    "start_url": "/",
+    "background_color": "#121212",
+    "theme_color": "#121212"
+}
