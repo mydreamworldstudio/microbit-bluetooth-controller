@@ -118,16 +118,20 @@ html, body {
     transform: translateY(-50%);
 }
 
-/* 🕹 Left Slider (30% from Left Edge) */
+/* 🕹 Left Slider (30% from Left Edge, Centered Vertically) */
 .left-slider {
     position: absolute;
     left: 30%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-/* 🕹 Right Slider (30% from Right Edge) */
+/* 🕹 Right Slider (30% from Right Edge, Centered Vertically) */
 .right-slider {
     position: absolute;
     right: 30%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /* 🎮 Sliders Styling */
