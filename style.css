@@ -116,10 +116,10 @@ html, body {
 /* 🎮 D-Pad: Perfect Diamond Shape (PS4 Style) */
 .dpad {
     display: grid;
-    grid-template-columns: 80px 80px 80px;  /* Increased for better spacing */
+    grid-template-columns: 80px 80px 80px;  /* Even spacing */
     grid-template-rows: 80px 80px 80px;
     position: relative;
-    width: 240px; /* Increased to match grid */
+    width: 240px; /* Matches grid size */
     height: 240px;
 }
 
@@ -127,7 +127,7 @@ html, body {
 .dpad-up {
     grid-column: 2;
     grid-row: 1;
-    transform: translateY(15px);  /* Increased spacing */
+    transform: translateY(15px);  
 }
 
 .dpad-left {
