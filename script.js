@@ -57,8 +57,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Prevent scrolling (important for mobile)
-    window.addEventListener("touchmove", function (event) {
+window.addEventListener("touchmove", function (event) {
+    if (!event.target.classList.contains("slider")) {
         event.preventDefault();
-    }, { passive: false });
+    }
+}, { passive: false });
+
 });
