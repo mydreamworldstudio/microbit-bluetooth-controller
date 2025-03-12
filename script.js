@@ -1,3 +1,8 @@
+document.addEventListener("DOMContentLoaded", function() {
+    // Hide the header to make controller full-screen
+    document.querySelector(".header").style.display = "none";
+});
+
 document.getElementById("connectBtn").addEventListener("click", async () => {
     try {
         const device = await navigator.bluetooth.requestDevice({
