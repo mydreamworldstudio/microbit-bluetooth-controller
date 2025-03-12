@@ -113,9 +113,9 @@ html, body {
 /* 🕹 Right Slider (30% from Right Edge, Centered Vertically, Fixed Overlap) */
 .right-slider {
     position: absolute;
-    right: 28%;  /* Adjusted to avoid overlapping */
-    top: 50%;
-    transform: translateY(-50%);
+    right: 40%;  /* Adjusted to avoid overlapping */
+    top: 80%;
+    transform: translateY(-80%);
 }
 
 /* 🎮 Sliders Styling */
