@@ -1,26 +1,22 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    
-    <!-- PWA Meta Tags -->
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="mobile-web-app-capable" content="yes">
-
     <title>Micro:bit Bluetooth Controller</title>
-    
-    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- Title & Connect Button -->
+    <!-- Title & Connect Buttons -->
     <div class="header">
         <h1 class="title">Micro:bit Bluetooth Controller</h1>
         <button id="connectBtn">Connect</button>
+        <button id="disconnectBtn">Disconnect</button>  <!-- ✅ Added missing button -->
     </div>
 
     <!-- Controller Layout -->
@@ -37,8 +33,8 @@
 
         <!-- Middle Section: Sliders -->
         <div class="middle-section">
-            <input type="range" class="slider left-slider" orient="vertical">
-            <input type="range" class="slider right-slider" orient="vertical">
+            <input type="range" class="slider left-slider" min="0" max="100" value="50" orient="vertical">  <!-- ✅ Fixed -->
+            <input type="range" class="slider right-slider" min="0" max="100" value="50" orient="vertical"> <!-- ✅ Fixed -->
         </div>
 
         <!-- Right Section: Action Buttons -->
