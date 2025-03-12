@@ -1,18 +1,18 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Enable Full-Screen Mode on Connection
+window.onload = function () {
+    console.log("Page Loaded - Script Running");
+
     function enableFullScreen() {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
-        } else if (document.documentElement.mozRequestFullScreen) { 
+        } else if (document.documentElement.mozRequestFullScreen) {
             document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullscreen) { 
+        } else if (document.documentElement.webkitRequestFullscreen) {
             document.documentElement.webkitRequestFullscreen();
-        } else if (document.documentElement.msRequestFullscreen) { 
+        } else if (document.documentElement.msRequestFullscreen) {
             document.documentElement.msRequestFullscreen();
         }
     }
 
-    // Bluetooth Micro:bit Connection
     const UART_SERVICE_UUID = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
     const UART_TX_CHARACTERISTIC_UUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
     const UART_RX_CHARACTERISTIC_UUID = "6e400003-b5a3-f393-e0a9-e50e24dcca9e";
@@ -22,8 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function connectMicrobit() {
         try {
-            enableFullScreen(); // Enter full-screen mode when connecting
-
+            enableFullScreen();
             console.log("Requesting Bluetooth Device...");
             uBitDevice = await navigator.bluetooth.requestDevice({
                 filters: [{ namePrefix: "BBC micro:bit" }],
@@ -89,10 +88,18 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Received from micro:bit:", receivedString);
     }
 
-    document.getElementById("connectBtn").addEventListener("click", connectMicrobit);
-    document.getElementById("disconnectBtn").addEventListener("click", disconnectMicrobit);
+    // Ensure Buttons Exist Before Attaching Events
+    let connectBtn = document.getElementById("connectBtn");
+    let disconnectBtn = document.getElementById("disconnectBtn");
 
-    // Button Mapping for Micro:bit Commands
+    if (connectBtn && disconnectBtn) {
+        connectBtn.addEventListener("click", connectMicrobit);
+        disconnectBtn.addEventListener("click", disconnectMicrobit);
+    } else {
+        console.warn("Connect/Disconnect buttons not found!");
+    }
+
+    // Button Mapping
     const buttonMap = {
         "dpad-up": "UP",
         "dpad-down": "DOWN",
@@ -104,7 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
         "cross": "X"
     };
 
-    // Handle D-Pad & Action Button Presses
     document.querySelectorAll(".dpad button, .buttons button").forEach(button => {
         button.addEventListener("mousedown", function () {
             let command = buttonMap[this.classList[1]] || "UNKNOWN";
@@ -118,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Handle Slider Input
+    // Slider Input
     document.querySelectorAll(".slider").forEach(slider => {
         slider.addEventListener("input", function () {
             let command = this.classList.contains("left-slider") ? `L_${this.value}` : `R_${this.value}`;
@@ -127,8 +133,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Prevent Scrolling on Mobile
+    // Prevent Scrolling
     window.addEventListener("touchmove", function (event) {
         event.preventDefault();
     }, { passive: false });
-});
+};
