@@ -100,22 +100,43 @@ html, body {
     gap: 30px;
 }
 
-/* 🎮 PS4-Style D-Pad (Diamond Shape) */
+/* D-Pad: PS4 Style Diamond Shape */
 .dpad {
     display: grid;
-    grid-template-columns: 60px 60px 60px;
-    grid-template-rows: 60px 60px 60px;
-    gap: 5px;
+    grid-template-columns: 65px 65px 65px;
+    grid-template-rows: 65px 65px 65px;
     align-items: center;
     justify-items: center;
+    gap: 10px; /* Ensures proper spacing */
+    position: relative;
 }
 
-/* Correct Placement for PS4-Style D-Pad */
+/* Adjust individual button positions */
 .dpad-up    { grid-column: 2; grid-row: 1; } /* Top */
 .dpad-left  { grid-column: 1; grid-row: 2; } /* Left */
 .dpad-right { grid-column: 3; grid-row: 2; } /* Right */
 .dpad-down  { grid-column: 2; grid-row: 3; } /* Bottom */
-.dpad-center { grid-column: 2; grid-row: 2; display: none; } /* Hide center */
+.dpad-center { grid-column: 2; grid-row: 2; display: none; } /* Hidden center button */
+
+/* Consistent button size */
+.btn {
+    width: 65px;
+    height: 65px;
+    font-size: 26px;
+    color: #00ffcc;
+    background: transparent;
+    border: 3px solid #00ffcc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* Button press effect */
+.btn:active {
+    background: #00ffcc;
+    color: #121212;
+}
+
 
 /* 🎮 PS4-Style Action Buttons (Mirrored D-Pad) */
 .buttons {
@@ -133,21 +154,3 @@ html, body {
 .circle   { grid-column: 3; grid-row: 2; } /* Right */
 .cross    { grid-column: 2; grid-row: 3; } /* Bottom */
 .action-center { grid-column: 2; grid-row: 2; display: none; } /* Hide center */
-
-/* Bigger Buttons */
-.btn {
-    width: 65px;
-    height: 65px;
-    font-size: 26px;
-    color: #00ffcc;
-    background: transparent;
-    border: 3px solid #00ffcc;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.btn:active {
-    background: #00ffcc;
-    color: #121212;
-}
