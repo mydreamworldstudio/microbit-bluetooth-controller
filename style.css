@@ -56,18 +56,18 @@ html, body {
     width: 30%;
 }
 
-/* 🎮 D-Pad: Perfect Diamond Shape */
+/* 🎮 D-Pad: Adjusted for Closer Buttons */
 .dpad {
     display: grid;
-    grid-template-columns: 80px 80px 80px;
-    grid-template-rows: 80px 80px 80px;
+    grid-template-columns: 65px 65px 65px;
+    grid-template-rows: 65px 65px 65px;
     justify-content: center;
     align-items: center;
-    width: 240px;
-    height: 240px;
+    width: 195px;
+    height: 195px;
 }
 
-/* Position buttons to form a perfect diamond */
+/* Adjust Button Placement (Closer) */
 .dpad-up {
     grid-column: 2;
     grid-row: 1;
@@ -88,11 +88,11 @@ html, body {
     grid-row: 3;
 }
 
-/* 🎮 Buttons Styling */
+/* 🎮 Button Styling */
 .btn {
-    width: 70px;
-    height: 70px;
-    font-size: 28px;
+    width: 60px;
+    height: 60px;
+    font-size: 26px;
     color: #00ffcc;
     background: transparent;
     border: 3px solid #00ffcc;
@@ -112,11 +112,25 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10vw;
-    width: 40%;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
 }
 
-/* 🕹 Sliders */
+/* 🕹 Left Slider (30% from Left Edge) */
+.left-slider {
+    position: absolute;
+    left: 30%;
+}
+
+/* 🕹 Right Slider (30% from Right Edge) */
+.right-slider {
+    position: absolute;
+    right: 30%;
+}
+
+/* 🎮 Sliders Styling */
 .slider {
     -webkit-appearance: none;
     writing-mode: vertical-lr;
@@ -144,18 +158,18 @@ html, body {
     width: 30%;
 }
 
-/* 🎮 PS4-Style Action Buttons (Mirrored D-Pad) */
+/* 🎮 Action Buttons (Reduced Spacing) */
 .buttons {
     display: grid;
-    grid-template-columns: 80px 80px 80px;
-    grid-template-rows: 80px 80px 80px;
+    grid-template-columns: 65px 65px 65px;
+    grid-template-rows: 65px 65px 65px;
     justify-content: center;
     align-items: center;
-    width: 240px;
-    height: 240px;
+    width: 195px;
+    height: 195px;
 }
 
-/* Correct Placement - Mirroring D-Pad */
+/* Adjust Button Placement (Closer) */
 .triangle { grid-column: 2; grid-row: 1; } /* Top */
 .square   { grid-column: 1; grid-row: 2; } /* Left */
 .circle   { grid-column: 3; grid-row: 2; } /* Right */
