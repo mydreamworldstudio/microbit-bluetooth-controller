@@ -24,7 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
             rxCharacteristic = await service.getCharacteristic("6e400003-b5a3-f393-e0a9-e50e24dcca9e");
 
             console.log("Bluetooth Connection Successful");
-            updateUI(true);
+
+            // Update UI on successful connection
+            document.getElementById("robotShow")?.classList.add("robotShow_connected");
 
             // Enable Notifications
             txCharacteristic.startNotifications();
@@ -64,20 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function onDisconnected(event) {
         console.log(`Device ${event.target.name} is disconnected.`);
-        updateUI(false);
+        document.getElementById("robotShow")?.classList.remove("robotShow_connected");
     }
 
-    function updateUI(connected) {
-        document.getElementById("connectBtn").disabled = connected;
-
-        document.querySelectorAll(".btn, .slider").forEach(el => {
-            el.disabled = !connected;
-        });
-
-        document.getElementById("robotShow")?.classList.toggle("robotShow_connected", connected);
-    }
-
-    // 🎮 Button Handling with Debounce
+    // 🎮 Button Handling
     const buttonMap = {
         "dpad-up": "UP",
         "dpad-down": "DOWN",
@@ -89,18 +81,10 @@ document.addEventListener("DOMContentLoaded", function () {
         "cross": "X"
     };
 
-    let buttonCooldown = false;
-    function sendButtonCommand(command) {
-        if (buttonCooldown) return;
-        buttonCooldown = true;
-        sendUART(command);
-        setTimeout(() => buttonCooldown = false, 100); // 100ms debounce
-    }
-
     document.querySelectorAll(".btn").forEach(button => {
         button.addEventListener("mousedown", () => {
             const command = buttonMap[button.classList[1]];
-            if (command) sendButtonCommand(command);
+            if (command) sendUART(command);
         });
 
         button.addEventListener("mouseup", () => {
@@ -108,23 +92,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 🎚 Slider Handling with Throttling
-    let lastSentLeft = 50, lastSentRight = 50;
-    
-    function sendSliderCommand(side, value) {
-        if (side === "L" && Math.abs(value - lastSentLeft) < 5) return;
-        if (side === "R" && Math.abs(value - lastSentRight) < 5) return;
-        
-        sendUART(`${side}_${value}`);
-        if (side === "L") lastSentLeft = value;
-        if (side === "R") lastSentRight = value;
-    }
-
+    // 🎚 Slider Handling
     document.querySelector(".left-slider").addEventListener("input", event => {
-        sendSliderCommand("L", event.target.value);
+        sendUART(`L_${event.target.value}`);
     });
 
     document.querySelector(".right-slider").addEventListener("input", event => {
-        sendSliderCommand("R", event.target.value);
+        sendUART(`R_${event.target.value}`);
     });
 });
