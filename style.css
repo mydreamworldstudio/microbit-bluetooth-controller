@@ -20,17 +20,17 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px; /* Space between title & button */
+    gap: 15px;
     padding: 10px 0;
 }
 
 .title {
-    font-size: 28px; /* Bigger Title */
+    font-size: 28px;
     margin: 0;
 }
 
 #connectBtn {
-    font-size: 22px; /* Bigger Button */
+    font-size: 22px;
     padding: 12px 24px;
     background-color: #00ffcc;
     border: none;
@@ -78,11 +78,11 @@ html, body {
     padding: 20px;
 }
 
-/* Left Side (D-Pad + Left Slider) */
+/* Left Section (D-Pad + Left Slider) */
 .left-section {
     display: flex;
     align-items: center;
-    gap: 30px; /* Increased space between D-Pad and slider */
+    gap: 30px;
 }
 
 /* Middle Section (Sliders) */
@@ -93,45 +93,45 @@ html, body {
     gap: 20px;
 }
 
-/* Right Side (Right Slider + Action Buttons) */
+/* Right Section (Right Slider + Action Buttons) */
 .right-section {
     display: flex;
     align-items: center;
-    gap: 30px; /* Increased space between action buttons and slider */
+    gap: 30px;
 }
 
-/* D-Pad (Fixed Grid Width) */
+/* 🎮 PS4-Style D-Pad (Diamond Shape) */
 .dpad {
     display: grid;
-    grid-template-columns: 60px 60px 60px; /* Wider grid */
-    grid-template-rows: 60px 60px 60px; /* Increased button spacing */
-    gap: 10px;
+    grid-template-columns: 60px 60px 60px;
+    grid-template-rows: 60px 60px 60px;
+    gap: 5px;
     align-items: center;
     justify-items: center;
 }
 
-/* Correct Grid Placement */
-.dpad-up    { grid-column: 2; grid-row: 1; }
-.dpad-left  { grid-column: 1; grid-row: 2; }
-.dpad-right { grid-column: 3; grid-row: 2; }
-.dpad-down  { grid-column: 2; grid-row: 3; }
-.dpad-center { grid-column: 2; grid-row: 2; display: none; } /* Hide center button */
+/* Correct Placement for PS4-Style D-Pad */
+.dpad-up    { grid-column: 2; grid-row: 1; } /* Top Center */
+.dpad-left  { grid-column: 1; grid-row: 2; } /* Middle Left */
+.dpad-right { grid-column: 3; grid-row: 2; } /* Middle Right */
+.dpad-down  { grid-column: 2; grid-row: 3; } /* Bottom Center */
+.dpad-center { grid-column: 2; grid-row: 2; } /* Center */
 
-/* Action Buttons */
+/* 🎮 Action Buttons (PS4 Style) */
 .buttons {
     display: grid;
-    grid-template-columns: 60px 60px; /* 2 Columns */
-    grid-template-rows: 60px 60px; /* 2 Rows */
+    grid-template-columns: 60px 60px;
+    grid-template-rows: 60px 60px;
     gap: 10px;
     align-items: center;
     justify-items: center;
 }
 
-/* Button Placement */
-.triangle { grid-column: 2; grid-row: 1; }
-.square   { grid-column: 1; grid-row: 2; }
-.circle   { grid-column: 2; grid-row: 2; }
-.cross    { grid-column: 1; grid-row: 1; }
+/* Correct Placement */
+.triangle { grid-column: 2; grid-row: 1; } /* Top */
+.square   { grid-column: 1; grid-row: 2; } /* Left */
+.circle   { grid-column: 2; grid-row: 2; } /* Right */
+.cross    { grid-column: 1; grid-row: 1; } /* Bottom */
 
 /* Bigger Buttons */
 .btn {
