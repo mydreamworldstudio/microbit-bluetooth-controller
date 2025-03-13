@@ -31,7 +31,7 @@ html, body {
 
 .controller-logo {
     position: absolute;
-    top: 35%;  /* Adjust based on layout */
+    top: 30%;  /* Adjust based on layout */
     left: 50%;
     transform: translate(-50%, -50%);
     width: 280px;  /* Adjust as needed */
@@ -116,6 +116,7 @@ html, body {
 .btn:active {
     background: #00ffcc;
     color: #121212;
+    transform: scale(0.9);
 }
 
 /* 🎛 Middle Section (Sliders) */
