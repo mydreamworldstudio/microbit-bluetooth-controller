@@ -31,10 +31,10 @@ html, body {
 
 .controller-logo {
     position: absolute;
-    top: 24%;  /* Adjust based on layout */
+    top: 35%;  /* Adjust based on layout */
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 180px;  /* Adjust as needed */
+    width: 280px;  /* Adjust as needed */
     opacity: 0.8;
     z-index: 10;
     pointer-events: none; /* Ensures it doesn't block button clicks */
