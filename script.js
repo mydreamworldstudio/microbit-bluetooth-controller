@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             console.log("Connecting to GATT Server...");
             await connectToGattServer();
+            enterFullScreen(); // Force full-screen after connection
 
         } catch (error) {
             console.error("Connection failed:", error);
@@ -36,8 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Bluetooth Connection Successful");
 
             updateConnectionStatus(true);
+            enterFullScreen(); // Ensure full-screen after reconnect
 
-            // Enable Notifications
             txCharacteristic.startNotifications();
             txCharacteristic.addEventListener("characteristicvaluechanged", onTxCharacteristicValueChanged);
 
@@ -64,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Micro:bit disconnected. Attempting to reconnect...");
         updateConnectionStatus(false);
 
-        // Wait 3 seconds before retrying
         setTimeout(async () => {
             if (uBitDevice) {
                 try {
@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     await connectToGattServer();
                     console.log("Reconnected!");
                     updateConnectionStatus(true);
+                    enterFullScreen(); // Full-screen on reconnect
                 } catch (error) {
                     console.error("Reconnect failed:", error);
                 }
@@ -153,4 +154,20 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".right-slider").addEventListener("input", event => {
         handleSliderInput(event.target, "R");
     });
+
+    // 📱 Full-Screen Handling
+    function enterFullScreen() {
+        let elem = document.documentElement;
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { // Firefox
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { // IE/Edge
+            elem.msRequestFullscreen();
+        }
+    }
+
+    document.addEventListener("click", enterFullScreen); // Trigger full-screen on any click
 });
