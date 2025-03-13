@@ -29,6 +29,17 @@ html, body {
     margin: 0;
 }
 
+.controller-logo {
+    position: absolute;
+    top: 24%;  /* Adjust based on layout */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;  /* Adjust as needed */
+    opacity: 0.8;
+    z-index: 10;
+    pointer-events: none; /* Ensures it doesn't block button clicks */
+}
+
 #connectBtn {
     font-size: 22px;
     padding: 12px 24px;
