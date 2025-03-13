@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let uBitDevice;
     let rxCharacteristic;
 
-    // Ensure Bluetooth connection is triggered by user gesture
     document.getElementById("connectBtn").addEventListener("click", connectMicrobit);
 
     async function connectMicrobit() {
@@ -10,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Requesting Bluetooth Device...");
             uBitDevice = await navigator.bluetooth.requestDevice({
                 filters: [{ namePrefix: "BBC micro:bit" }],
-                optionalServices: ["6e400001-b5a3-f393-e0a9-e50e24dcca9e"] // UART service
+                optionalServices: ["6e400001-b5a3-f393-e0a9-e50e24dcca9e"]
             });
 
             console.log("Connecting to GATT Server...");
@@ -25,24 +24,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
             console.log("Bluetooth Connection Successful");
 
-            // Update UI on successful connection
-            document.getElementById("robotShow")?.classList.add("robotShow_connected");
+            updateConnectionStatus(true);
 
-            // Enable Notifications
             txCharacteristic.startNotifications();
             txCharacteristic.addEventListener("characteristicvaluechanged", onTxCharacteristicValueChanged);
 
-            uBitDevice.addEventListener('gattserverdisconnected', onDisconnected);
+            uBitDevice.addEventListener('gattserverdisconnected', reconnectMicrobit);
 
         } catch (error) {
             console.error("Connection failed:", error);
         }
     }
 
+    function updateConnectionStatus(connected) {
+        const connectBtn = document.getElementById("connectBtn");
+        if (connected) {
+            connectBtn.innerText = "Connected!";
+            connectBtn.style.background = "#0077ff";
+        } else {
+            connectBtn.innerText = "Reconnect";
+            connectBtn.style.background = "#ff3333";
+        }
+    }
+
+    async function reconnectMicrobit() {
+        console.log("Micro:bit disconnected. Attempting to reconnect...");
+        updateConnectionStatus(false);
+
+        // Wait 3 seconds before retrying
+        setTimeout(async () => {
+            if (uBitDevice) {
+                try {
+                    console.log("Reconnecting...");
+                    await uBitDevice.gatt.connect();
+                    console.log("Reconnected!");
+                    updateConnectionStatus(true);
+                } catch (error) {
+                    console.error("Reconnect failed:", error);
+                }
+            }
+        }, 3000);
+    }
+
     async function sendUART(command) {
         if (!rxCharacteristic) return;
         let encoder = new TextEncoder();
-        queueGattOperation(() => 
+        queueGattOperation(() =>
             rxCharacteristic.writeValue(encoder.encode(command + "\n"))
                 .then(() => console.log("Sent:", command))
                 .catch(error => console.error("Error sending data:", error))
@@ -64,12 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Received:", receivedString);
     }
 
-    function onDisconnected(event) {
-        console.log(`Device ${event.target.name} is disconnected.`);
-        document.getElementById("robotShow")?.classList.remove("robotShow_connected");
-    }
-
-    // 🎮 Button Handling
+    // 🎮 Button Handling - Improved for Mobile
     const buttonMap = {
         "dpad-up": "UP",
         "dpad-down": "DOWN",
@@ -82,22 +104,40 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     document.querySelectorAll(".btn").forEach(button => {
-        button.addEventListener("mousedown", () => {
+        button.addEventListener("touchstart", e => e.preventDefault(), { passive: false });
+
+        function sendStartCommand() {
             const command = buttonMap[button.classList[1]];
             if (command) sendUART(command);
-        });
+        }
 
-        button.addEventListener("mouseup", () => {
+        function sendStopCommand() {
             sendUART("STOP");
-        });
+        }
+
+        button.addEventListener("touchstart", sendStartCommand);
+        button.addEventListener("touchend", sendStopCommand);
+        button.addEventListener("touchcancel", sendStopCommand);
+
+        button.addEventListener("mousedown", sendStartCommand);
+        button.addEventListener("mouseup", sendStopCommand);
+        button.addEventListener("mouseleave", sendStopCommand);
     });
 
-    // 🎚 Slider Handling
+    // 🎚 Slider Handling - Improved with Debounce
+    let sliderTimeout;
+    function handleSliderInput(slider, prefix) {
+        clearTimeout(sliderTimeout);
+        sliderTimeout = setTimeout(() => {
+            sendUART(`${prefix}_${slider.value}`);
+        }, 100);
+    }
+
     document.querySelector(".left-slider").addEventListener("input", event => {
-        sendUART(`L_${event.target.value}`);
+        handleSliderInput(event.target, "L");
     });
 
     document.querySelector(".right-slider").addEventListener("input", event => {
-        sendUART(`R_${event.target.value}`);
+        handleSliderInput(event.target, "R");
     });
 });
