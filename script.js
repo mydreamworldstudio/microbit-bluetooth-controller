@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     let uBitDevice;
     let rxCharacteristic;
+    let txCharacteristic;
 
     document.getElementById("connectBtn").addEventListener("click", connectMicrobit);
 
@@ -13,26 +14,38 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             console.log("Connecting to GATT Server...");
+            await connectToGattServer();
+
+        } catch (error) {
+            console.error("Connection failed:", error);
+        }
+    }
+
+    async function connectToGattServer() {
+        try {
+            if (!uBitDevice) return;
             const server = await uBitDevice.gatt.connect();
 
             console.log("Getting Service...");
             const service = await server.getPrimaryService("6e400001-b5a3-f393-e0a9-e50e24dcca9e");
 
             console.log("Getting Characteristics...");
-            const txCharacteristic = await service.getCharacteristic("6e400002-b5a3-f393-e0a9-e50e24dcca9e");
+            txCharacteristic = await service.getCharacteristic("6e400002-b5a3-f393-e0a9-e50e24dcca9e");
             rxCharacteristic = await service.getCharacteristic("6e400003-b5a3-f393-e0a9-e50e24dcca9e");
 
             console.log("Bluetooth Connection Successful");
 
             updateConnectionStatus(true);
 
+            // Enable Notifications
             txCharacteristic.startNotifications();
             txCharacteristic.addEventListener("characteristicvaluechanged", onTxCharacteristicValueChanged);
 
             uBitDevice.addEventListener('gattserverdisconnected', reconnectMicrobit);
 
         } catch (error) {
-            console.error("Connection failed:", error);
+            console.error("GATT Connection Failed:", error);
+            updateConnectionStatus(false);
         }
     }
 
@@ -56,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (uBitDevice) {
                 try {
                     console.log("Reconnecting...");
-                    await uBitDevice.gatt.connect();
+                    await connectToGattServer();
                     console.log("Reconnected!");
                     updateConnectionStatus(true);
                 } catch (error) {
