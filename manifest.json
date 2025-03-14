@@ -9,19 +9,19 @@
   "theme_color": "#121212",
   "icons": [
     {
-      "src": "/icons/icon-192x192.png",
+      "src": "/microbit-bluetooth-controller/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/icons/icon-512x512.png",
+      "src": "/microbit-bluetooth-controller/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "screenshots": [
     {
-      "src": "/icons/screenshot-wide.png",
+      "src": "/microbit-bluetooth-controller/icons/screenshot-wide.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide"
