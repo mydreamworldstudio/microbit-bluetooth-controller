@@ -1,13 +1,13 @@
 const CACHE_NAME = 'microbit-controller-v1';
 const ASSETS_TO_CACHE = [
-    '/',
-    '/index.html',
-    '/style.css',
-    '/script.js',
-    '/manifest.json',
-    '/controller-logo.png',
-    '/icons/icon-192x192.png',
-    '/icons/icon-512x512.png'
+    '/microbit-bluetooth-controller/',
+    '/microbit-bluetooth-controller/index.html',
+    '/microbit-bluetooth-controller/style.css',
+    '/microbit-bluetooth-controller/script.js',
+    '/microbit-bluetooth-controller/manifest.json',
+    '/microbit-bluetooth-controller/controller-logo.png',
+    '/microbit-bluetooth-controller/icons/icon-192x192.png',
+    '/microbit-bluetooth-controller/icons/icon-512x512.png'
 ];
 
 // Install Service Worker
