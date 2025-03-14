@@ -1,8 +1,22 @@
 {
-    "name": "Microbit Bluetooth Controller",
-    "short_name": "Microbit Controller",
-    "display": "standalone",
-    "start_url": "/",
-    "background_color": "#121212",
-    "theme_color": "#121212"
+  "name": "Micro:bit Bluetooth Controller",
+  "short_name": "Microbit Controller",
+  "description": "A PWA for controlling the micro:bit via Bluetooth.",
+  "start_url": "/microbit-bluetooth-controller/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#121212",
+  "theme_color": "#121212",
+  "icons": [
+    {
+      "src": "/microbit-bluetooth-controller/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/microbit-bluetooth-controller/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
