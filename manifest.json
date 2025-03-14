@@ -1,4 +1,5 @@
 {
+  "id": "/microbit-bluetooth-controller/",
   "name": "Micro:bit Bluetooth Controller",
   "short_name": "Microbit Controller",
   "description": "A PWA for controlling the micro:bit via Bluetooth.",
